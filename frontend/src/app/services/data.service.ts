@@ -25,23 +25,20 @@ export class DataService {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       this.data = { data: [], labels: [] }; // probably saves a few milliseconds haha
-    })
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      window.alert(errorMessage);
+    
+    });
   }
 
   getData(): { data: any[]; labels: any[] } { // only have to fetch the data once
-    if (this.data === null){
-      this.fetchData().then((d) => {
-        this.data = d
-      });
-    }
-    return this.data;
+    return this.data
   }
 
-  fetchData(): Promise<{ data: any[]; labels: any[] }> {
+  fetchData() {
     this.t = this.token.getToken() || "none";
-    if (this.t === "none") {
-      return Promise.resolve({ data: [], labels: [] } as { data: any[]; labels: any[] }); 
-    }
 
     return fetch('http://127.0.0.1:5000/data', {
       method: 'GET',
@@ -51,17 +48,17 @@ export class DataService {
       },
     }).then((response) => {
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        return;
       }
       return response.json();
     }).then((json) => {
-      console.log(json.budgetData);
-      return json.budgetData;  // Return the actual data
+      this.data = json.budgetData;  // Return the actual data
+     
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       window.alert(errorMessage);
-      return Promise.resolve({ data: [], labels: [] } as { data: any[]; labels: any[] });
+    
     });
   }
 }

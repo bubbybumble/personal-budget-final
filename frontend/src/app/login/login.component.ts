@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { TokenService } from '../services/token.service'
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
     password: '',
   };
   passwordInvalid = false;
-  constructor(private http: HttpClient, private tokenService: TokenService, private router: Router) {}
+  constructor(private http: HttpClient, private tokenService: TokenService, private router: Router, private dataService: DataService) {}
   login() {
     const auth = getAuth();
 
@@ -24,7 +25,10 @@ export class LoginComponent {
       const user = userCredential.user;
       user.getIdToken().then(res => {
         this.tokenService.setToken(res);
-        this.router.navigate(['/']);
+        this.dataService.fetchData().then(() => {
+          this.router.navigate(['/']);
+        })
+        
       });
       console.log("successful login");
     })

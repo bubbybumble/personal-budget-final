@@ -15,25 +15,25 @@ export class PiechartComponent {
   labels = [''];
 
   public noData = false;
-
   ngAfterViewInit(): void {
-    Chart.register(...registerables);
+    
     this.chartInfo = this.dataService.getData();
     this.data = this.chartInfo.data;
     this.labels = this.chartInfo.labels;
-    this.createChart();
-    
-
-   
-  }
-
-  createChart() {
-
     if (this.data.length === 0) {
       this.noData = true;
-      return;
+     
+    } else {
+      this.noData = false;
+      this.createChart();
     }
-    this.noData = false;
+    
+  }
+
+
+
+  createChart() {
+    Chart.register(...registerables);
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
     new Chart(ctx, {
       type: 'doughnut',

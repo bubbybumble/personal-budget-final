@@ -16,7 +16,7 @@ firebaseConfig = {
   "measuremen": "G-68GWKNRE1J"
 }
 
-cred = credentials.Certificate("personalbudget-35dfc-firebase-adminsdk-vl9dl-0371f84e44.json")
+cred = credentials.Certificate("secrets/personalbudget-35dfc-firebase-adminsdk-vl9dl-9b6e00d8ac.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
