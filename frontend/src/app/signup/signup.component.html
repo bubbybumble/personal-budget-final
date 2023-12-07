@@ -1,0 +1,26 @@
+<h1>Sign up</h1>
+
+<form (ngSubmit)="signin()" #signupForm="ngForm">
+  <label for="username">Email</label>
+  <input type="email" id="username" name="username" [(ngModel)]="formData.username" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" [(ngModel)]="formData.password" required>
+
+  <label for="confirmPassword">Confirm password</label>
+  <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="formData.confirmPassword" required>
+
+  <div *ngIf="passwordInvalid" class="error-message">
+    Password must be at least 6 characters!
+  </div>
+  <div *ngIf="passwordsMatch == false" class="error-message">
+    Passwords must match!
+  </div>
+
+  <button type="submit" [disabled]="!signupForm.valid">Create account</button>
+</form>
+
+
+
+
+

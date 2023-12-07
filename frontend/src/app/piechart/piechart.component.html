@@ -1,0 +1,8 @@
+<!-- TODO make this not an error message -->
+<div *ngIf="noData == true" class="error-message">
+  You have not entered any budget data yet
+</div>
+
+<div *ngIf="noData == false">
+  <canvas height="200" width="200" #chartCanvas id="chartCanvas"></canvas>
+</div>
