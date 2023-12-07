@@ -21,33 +21,53 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+@app.route('/edit_data', methods=['POST'])
+def editData():
+  id_token = request.headers.get('auth')
+  try:
+    # Verify the ID token
+    decoded_token = auth.verify_id_token(id_token)
+    
+    # Extract the user ID
+    user_id = decoded_token['uid']
+
+    # Get a reference to the 'budget' collection and create a document with the user's ID
+    doc_ref = db.collection('budget').document(str(user_id))
+
+    # Set the document with the data
+    doc_ref.set(data)
+
+    return {'message': 'Document created successfully'}, 200
+  except auth.AuthError as e:
+    print(e)
+    return {'error': str(e)}, 401
 
 @app.route('/create_data', methods=['POST'])
 def createDocument():
-    id_token = request.headers.get('auth')
-    try:
-        # Verify the ID token
-        decoded_token = auth.verify_id_token(id_token)
-        
-        # Extract the user ID
-        user_id = decoded_token['uid']
+  id_token = request.headers.get('auth')
+  try:
+    # Verify the ID token
+    decoded_token = auth.verify_id_token(id_token)
+    
+    # Extract the user ID
+    user_id = decoded_token['uid']
 
-        # Get a reference to the 'budget' collection and create a document with the user's ID
-        doc_ref = db.collection('budget').document(str(user_id))
+    # Get a reference to the 'budget' collection and create a document with the user's ID
+    doc_ref = db.collection('budget').document(str(user_id))
 
-        # Example data to be stored in the document
-        data = {
-          data: [],
-          labels: []
-        }
+    # Example data to be stored in the document
+    data = {
+      data: [],
+      labels: []
+    }
 
-        # Set the document with the data
-        doc_ref.set(data)
+    # Set the document with the data
+    doc_ref.set(data)
 
-        return {'message': 'Document created successfully'}, 200
-    except auth.AuthError as e:
-        print(e)
-        return {'error': str(e)}, 401
+    return {'message': 'Document created successfully'}, 200
+  except auth.AuthError as e:
+    print(e)
+    return {'error': str(e)}, 401
 
 @app.route('/data', methods=['GET'])
 def getData():

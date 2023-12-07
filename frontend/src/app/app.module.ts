@@ -12,7 +12,8 @@ import { firebaseConfig } from './firebase.config';
 import * as firebase from 'firebase/app';
 import { TokenService } from './services/token.service';
 import { AuthComponent } from './auth/auth.component';
-import { PiechartComponent } from './piechart/piechart.component'
+import { PiechartComponent } from './piechart/piechart.component';
+import { EditComponent } from './edit/edit.component'
 
 firebase.initializeApp(firebaseConfig);
 
@@ -23,7 +24,8 @@ firebase.initializeApp(firebaseConfig);
     LoginComponent,
     DashboardComponent,
     AuthComponent,
-    PiechartComponent
+    PiechartComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
