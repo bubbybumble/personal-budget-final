@@ -1,12 +1,15 @@
-<h1>Log in</h1>
+<h3 class="is-size-4">Log in</h3>
 
 <form (ngSubmit)="login()" #loginForm="ngForm">
-  <label for="username">Email</label>
-  <input type="email" id="username" name="username" [(ngModel)]="formData.username" required>
-
-  <label for="password">Password</label>
-  <input type="password" id="password" name="password" [(ngModel)]="formData.password" required>
-
-
-  <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+  <div class="field">
+    <label class="label" for="username">Email</label>
+    <input class="input" type="email" id="username" name="username" [(ngModel)]="formData.username" required>
+  </div>
+  <div class="field">
+    <label class="label" for="password">Password</label>
+    <input class="input" type="password" id="password" name="password" [(ngModel)]="formData.password" required>
+  </div>
+  <div class="field">
+    <button class="button is-primary" type="submit" [disabled]="!loginForm.valid">Log in</button>
+  </div>
 </form>
