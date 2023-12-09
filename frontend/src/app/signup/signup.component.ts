@@ -49,11 +49,7 @@ export class SignupComponent {
           this.router.navigate(['/']);
           console.log("successful signup");
         });
-        
 
-       
-        
-        
       })
       .catch((error) => {
         const errorCode = error.code;

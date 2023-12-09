@@ -15,16 +15,26 @@ export class PiechartComponent {
   labels = [''];
 
   public noData = false;
-  ngAfterViewInit(): void {
-    
+
+  ngOnInit(): void {
+    this.noData = false;
     this.chartInfo = this.dataService.getData();
+    if (this.chartInfo === undefined) {
+      this.noData = true;
+      this.chartInfo = {
+        data: [],
+        labels: []
+      }
+    }
     this.data = this.chartInfo.data;
     this.labels = this.chartInfo.labels;
+
     if (this.data.length === 0) {
       this.noData = true;
-     
-    } else {
-      this.noData = false;
+    }
+  }
+  ngAfterViewInit(): void {
+    if(this.noData == false) {
       this.createChart();
     }
     

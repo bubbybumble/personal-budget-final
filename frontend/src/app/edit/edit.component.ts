@@ -7,11 +7,10 @@ import { Component } from '@angular/core';
 })
 export class EditComponent {
   formData = {
-    label: '',
-    value: 0,
+    value: 0
   };
 
-  add() {
+  edit() {
     
   }
 
