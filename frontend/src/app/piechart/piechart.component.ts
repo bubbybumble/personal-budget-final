@@ -16,7 +16,18 @@ export class PiechartComponent {
 
   public noData = false;
 
+  private chart: Chart<"doughnut", number[], string>;
+
   ngOnInit(): void {
+    this.onDataRefreshed();
+  }
+  ngAfterViewInit(): void {
+    if(this.noData == false) {
+      this.createChart();
+    }
+  }
+
+  onDataRefreshed() {
     this.noData = false;
     this.chartInfo = this.dataService.getData();
     if (this.chartInfo === undefined) {
@@ -32,12 +43,14 @@ export class PiechartComponent {
     if (this.data.length === 0) {
       this.noData = true;
     }
-  }
-  ngAfterViewInit(): void {
-    if(this.noData == false) {
-      this.createChart();
+
+    if (this.chart != undefined && this.chart != null) {
+      this.chart.data.labels = this.chartInfo.labels;
+      this.chart.data.datasets.forEach((dataset) => { 
+        dataset.data = this.chartInfo.data;
+      });
+      this.chart.update();
     }
-    
   }
 
 
@@ -45,7 +58,7 @@ export class PiechartComponent {
   createChart() {
     Chart.register(...registerables);
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
-    new Chart(ctx, {
+    this.chart = new Chart(ctx, {
       type: 'doughnut',
       data: {
         labels: this.labels,

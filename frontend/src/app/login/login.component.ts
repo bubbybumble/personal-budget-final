@@ -26,7 +26,11 @@ export class LoginComponent {
       user.getIdToken().then(res => {
         this.tokenService.setToken(res);
         this.dataService.fetchData().then(() => {
-          this.router.navigate(['/']);
+          console.log('should be fetching now')
+         // this.router.navigate(['/']);
+        })
+        .catch((error) => {
+          console.log(error.message);
         })
         
       });

@@ -59,8 +59,9 @@ def getData():
 
     # Get the document data
     doc_data = doc_ref.get().to_dict()
-
+    
     print('getting data')
+    print(doc_data)
     return {'message': 'data success', 'budgetData' : doc_data}, 200
   except auth.AuthError as e:
     print(e)

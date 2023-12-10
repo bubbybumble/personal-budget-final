@@ -45,7 +45,7 @@ export class SignupComponent {
         const user = userCredential.user;
         user.getIdToken().then(res => {
           this.tokenService.setToken(res);
-          this.dataService.createData()
+          this.dataService.createData();
           this.router.navigate(['/']);
           console.log("successful signup");
         });
