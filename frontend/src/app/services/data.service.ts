@@ -55,6 +55,11 @@ export class DataService {
   }
 
   getData(): { data: any[]; labels: any[] } { // only have to fetch the data once
+    if (this.data === null || this.data === undefined){
+      const d = localStorage.getItem('data') || '{"data": [], "labels": []}'
+      this.data = JSON.parse(d);
+    }
+    
     return this.data
   }
 
@@ -83,6 +88,7 @@ export class DataService {
         const ungzippedDataUint8Array = pako.ungzip(gzippedDataUint8Array);
         const ungzippedDataString = new TextDecoder().decode(ungzippedDataUint8Array);
         this.data = JSON.parse(ungzippedDataString) || {data: [], labels: []};  
+        localStorage.setItem('data', JSON.stringify(this.data));
       } catch (error) {
         console.error('Error during ungzip:', error);
       }

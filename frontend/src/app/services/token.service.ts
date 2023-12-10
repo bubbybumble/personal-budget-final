@@ -10,9 +10,13 @@ export class TokenService {
 
   setToken(token: string): void {
     this.token = token;
+    localStorage.setItem("token", this.token);
   }
 
   getToken(): string | null {
+    if (this.token === null || this.token === undefined) {
+      this.token = localStorage.getItem("token");
+    }
     return this.token;
   }
 
@@ -21,8 +25,8 @@ export class TokenService {
   }
 
   isLoggedIn(): boolean {
-    const auth = getAuth();
-    if (this.token === null || auth.currentUser === null) {
+    const t = this.getToken();
+    if (t === null || t === undefined) {
       return false;
     }
     return true;
