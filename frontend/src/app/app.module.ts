@@ -18,6 +18,8 @@ import { AddComponent } from './add/add.component';
 import { ListComponent } from './list/list.component';
 import { LogoutComponent } from './logout/logout.component'
 import { DataService } from './services/data.service';
+import { BarchartComponent } from './barchart/barchart.component';
+import { PolarChartComponent } from './polarchart/polarchart.component';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -32,7 +34,9 @@ firebase.initializeApp(firebaseConfig);
     EditComponent,
     AddComponent,
     ListComponent,
-    LogoutComponent
+    LogoutComponent,
+    BarchartComponent,
+    PolarChartComponent
   ],
   imports: [
     BrowserModule,
