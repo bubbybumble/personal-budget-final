@@ -1,9 +1,19 @@
-<form (ngSubmit)="add()" #addForm="ngForm">
-  <label for="label">Name</label>
-  <input type="text" id="label" name="label" [(ngModel)]="formData.label" required>
-
-  <label for="value">Dollars</label>
-  <input type="number" id="value" name="value" [(ngModel)]="formData.value" required>
-
-  <button class="button is-info is-small" type="submit" [disabled]="!addForm.valid">Add item</button>
-</form>
+<div class="block m-4">
+  <h3 class="is-size-3">Add item</h3>
+  <form class="columns" (ngSubmit)="add()" #addForm="ngForm">
+    <div class="column">
+      <input placeholder="Name" class="input" type="text" id="label" name="label" [(ngModel)]="formData.label" required>
+    </div>
+    <div class="column">
+      <input placeholder="Dollars" class="input" type="number" id="value" name="value" [(ngModel)]="formData.value" required>
+  
+    </div>
+      <div class="column">
+      <button class="button is-info" type="submit" [disabled]="!addForm.valid">Add item</button>
+      
+    </div>
+    
+  
+    
+  </form>
+</div>

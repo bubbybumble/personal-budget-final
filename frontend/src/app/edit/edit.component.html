@@ -1,4 +1,4 @@
-<form (ngSubmit)="edit()" #addForm="ngForm">
-  <input placeholder="New dollar amount" type="number" id="value" name="value" [(ngModel)]="formData.value" required>
-  <button class="button is-info is-small" type="submit" [disabled]="!addForm.valid">Update item</button>
+<form class="field" (ngSubmit)="edit()" #addForm="ngForm">
+  <input class="input" placeholder="New dollar amount" type="number" id="value" name="value" [(ngModel)]="formData.value" required>
+  <button class="button is-info is-small m-2" type="submit" [disabled]="!addForm.valid">Update item</button>
 </form>

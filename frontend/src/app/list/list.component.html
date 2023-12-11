@@ -1,9 +1,35 @@
-<div *ngFor="let item of data.data; let i = index">
+<!-- <div *ngFor="let item of data.data; let i = index">
   <p>{{ data.labels[i] }}: {{ item }}</p>
   <a class="button is-danger is-small" href="#" (click)="deleteItem(data.labels[i])">Delete</a>
   <a class="button is-info is-small" href="#" (click)="editItem(i)">Edit</a>
   <div *ngIf="i == editing">
     <app-edit></app-edit>
   </div>
+</div> -->
+<div class="block m-4">
+  <h3 class="is-size-3">Your budget items: </h3>
+  <div class="columns is-multiline">
+    <div class="column is-4" *ngFor="let entry of data.labels; let i = index">
+      <div class="box">
+        <div class="columns">
+          <div class="column is-three-quarters">
+            <!-- Display the entry and value -->
+            <p>{{ entry }}: {{ data.data[i] }}</p>
+          </div>
+          <div class="buttons">
+            <!-- Edit and Delete buttons -->
+            <button class="button is-info" (click)="editItem(i)">Edit</button>
+            <button class="button is-danger" (click)="deleteItem(entry)">Delete</button>
+          </div>
+          
+        </div>
+        <div *ngIf="i == editing">
+          <app-edit></app-edit>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 <app-add></app-add>
