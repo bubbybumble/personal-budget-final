@@ -9,8 +9,14 @@ export class TokenService {
   private token: string | null = null;
 
   setToken(token: string): void {
-    this.token = token;
-    localStorage.setItem("token", this.token);
+    if (token === "none") {
+      this.token = null;
+      localStorage.removeItem("token");
+    } else {
+      this.token = token;
+      localStorage.setItem("token", this.token);
+    }
+    
   }
 
   getToken(): string | null {

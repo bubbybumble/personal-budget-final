@@ -1,9 +1,4 @@
 <form (ngSubmit)="edit()" #addForm="ngForm">
-  <label for="label">Name</label>
-  <p>NAME_HERE</p>
-
-  <label for="value">Dollars</label>
-  <input type="number" id="value" name="value" [(ngModel)]="formData.value" required>
-
-  <button type="submit" [disabled]="!addForm.valid">Add item</button>
+  <input placeholder="New dollar amount" type="number" id="value" name="value" [(ngModel)]="formData.value" required>
+  <button class="button is-info is-small" type="submit" [disabled]="!addForm.valid">Update item</button>
 </form>

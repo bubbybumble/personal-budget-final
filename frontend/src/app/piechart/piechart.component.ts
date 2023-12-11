@@ -19,6 +19,7 @@ export class PiechartComponent {
   private chart: Chart<"doughnut", number[], string>;
 
   ngOnInit(): void {
+    this.dataService.onDataUpdated.subscribe(updatedData => this.onDataRefreshed());
     this.onDataRefreshed();
   }
   ngAfterViewInit(): void {
@@ -43,8 +44,10 @@ export class PiechartComponent {
     if (this.data.length === 0) {
       this.noData = true;
     }
-
+    console.log('mmm')
+    console.log(this.chart)
     if (this.chart != undefined && this.chart != null) {
+      console.log("refre")
       this.chart.data.labels = this.chartInfo.labels;
       this.chart.data.datasets.forEach((dataset) => { 
         dataset.data = this.chartInfo.data;

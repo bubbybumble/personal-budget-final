@@ -1,5 +1,9 @@
 <div *ngFor="let item of data.data; let i = index">
   <p>{{ data.labels[i] }}: {{ item }}</p>
-  <a class="button is-danger" href="#" (click)="deleteItem(data.labels[i])">Delete</a>
+  <a class="button is-danger is-small" href="#" (click)="deleteItem(data.labels[i])">Delete</a>
+  <a class="button is-info is-small" href="#" (click)="editItem(i)">Edit</a>
+  <div *ngIf="i == editing">
+    <app-edit></app-edit>
+  </div>
 </div>
 <app-add></app-add>

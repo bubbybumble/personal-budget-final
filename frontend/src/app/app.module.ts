@@ -15,7 +15,9 @@ import { AuthComponent } from './auth/auth.component';
 import { PiechartComponent } from './piechart/piechart.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
-import { ListComponent } from './list/list.component'
+import { ListComponent } from './list/list.component';
+import { LogoutComponent } from './logout/logout.component'
+import { DataService } from './services/data.service';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -29,7 +31,8 @@ firebase.initializeApp(firebaseConfig);
     PiechartComponent,
     EditComponent,
     AddComponent,
-    ListComponent
+    ListComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ firebase.initializeApp(firebaseConfig);
     
   ],
   providers: [
-    TokenService
+    TokenService,
+    DataService
   ],
   bootstrap: [AppComponent]
 })

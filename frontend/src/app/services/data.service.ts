@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { TokenService } from './token.service';
 import * as pako from 'pako';
 import { Router } from '@angular/router';
@@ -7,9 +7,11 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class DataService {
+  onDataUpdated = new EventEmitter<{ data: any[]; labels: any[] }>();
   constructor(private router: Router, private token: TokenService) {}
   private t: string;
   public elementExists: boolean;
+  public dataToEdit = -1;
   private data: { data: any[]; labels: any[] };
 
   addEntry(label: string, value: number): void {
@@ -24,14 +26,13 @@ export class DataService {
     this.overwriteData();
   }
 
-  editEntry(label: string, value: number): void {
-    const index = this.data.labels.indexOf(label);
-    if (index >= 0) {
-      this.data.data[index] = value;
 
-      this.overwriteData();
+  editEntry(value: number): void {
+    if (this.dataToEdit >= 0 && this.dataToEdit < this.data.data.length) {
+      this.data.data[this.dataToEdit] = value;
+      
     }
-
+    this.overwriteData();
   }
 
   deleteEntry(label: string): void {
@@ -104,8 +105,9 @@ export class DataService {
   }
 
   overwriteData() {
-    
+    this.onDataUpdated.emit(this.data);
     const jsonData = JSON.stringify(this.data);
+    localStorage.setItem('data', jsonData);
 
     // Compress the string using gzip
     const compressedDataUint8Array = pako.gzip(jsonData);
@@ -129,5 +131,6 @@ export class DataService {
       body: storedData,
       
     });
+    
   }
 }

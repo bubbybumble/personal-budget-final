@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -7,7 +7,6 @@ import { DataService } from '../services/data.service';
   styleUrl: './add.component.scss'
 })
 export class AddComponent {
-  @Output() dataRefreshed = new EventEmitter<void>();
   constructor(private dataService: DataService) {}
   formData = {
     label: '',
@@ -15,7 +14,9 @@ export class AddComponent {
   };
 
   add() {
-    this.dataService.addEntry(this.formData.label, this.formData.value);
-    this.dataRefreshed.emit();
+    if (this.formData.value > 0){
+      this.dataService.addEntry(this.formData.label, this.formData.value);
+    }
+    
   }
 }
