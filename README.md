@@ -7,3 +7,5 @@ I am using bulma as a simple CSS framework to make this app look presentable. I 
 I chose to host this on a fedora droplet as fedora is what I use for my laptop and it would replicate the conditions I had when I made it. I know we were taught how to use Centos7, the old downstream of RHEL, and Fedora is an upstream of it, in fact even more upstream than centos. However I still think the tradeoff for this assignment is worth it since I have verified on my machine that it works.
 
 For the server I am using nginx and gunicorn. I have to change some of the IP addresses on the server side, mainly anything that uses localhost. 
+
+Also, for some reason you must refresh for the pie chart to work after the first piece of data is added. It updates after that though.
